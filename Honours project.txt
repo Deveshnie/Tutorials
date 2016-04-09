@@ -1,0 +1,15 @@
+Deveshnie Mudaly
+deveshniemudaly@ymail.com
+
+The goal of this project is to investigate theories of dark energy and the cosmological constant.
+
+The project consists of two parts:
+
+(1) a survey of the literature to understand some of the competing theories to explain the accelerated expansion of the
+ universe and the underlying physics, and
+
+(2) integrating numerically the ordinary differential equation for the expansion of the universe to obtain theoretical
+ predictions for various observables and constructing a likelihood for BAO and supernova data, so that the theories can be 
+ constrained by observational data.
+ 
+ I would like to learn how to perform numerical integration and how to plot graphs in python.
