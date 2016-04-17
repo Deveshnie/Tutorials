@@ -1,0 +1,5 @@
+6. x[1,-1,2] #all even points from array skipping first and last points
+   x[2:-1:2] #all even numbers from array skipping first and last numbers
+
+   x[0::2] #all odd points from array
+   x[1::2] #all odd numbers from array
