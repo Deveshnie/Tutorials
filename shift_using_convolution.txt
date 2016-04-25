@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def conv(y,shift):
+    g=np.zeros(len(y)) 
+    g[shift]=1
+    
+    ft1=np.fft.fft(y)
+    ft2=np.fft.fft(g)
+    return np.real(np.fft.ifft(ft2*ft1))    #inverse fourier transform of 
+    #product of 2 fourier transforms 
+    
+
+x=np.arange(-100,100,0.1)   #array of x values. 
+y=np.exp(-0.5*x**2/(10**2)) #Gaussian
+
+
+shift=len(y)/2              #shift of 1000
+h=conv(y,shift)             #finding the convolution of the 
+plt.plot(x,y)               #plots x versus y
+plt.plot(x,h)               #plots x vs the convolution 
+plt.ylim(0,1)               #graph goes from zero to 1(limits of y axis)
+
+plt.title('Shift using Convolution')
+plt.show()

@@ -1,0 +1,63 @@
+import numpy as np
+import matplotlib.pyplot as plt
+def f(x):
+    return np.cos(x)
+    
+x0=0.0
+xmax=np.pi/2.0
+
+
+n=11
+
+x=np.linspace(x0,xmax,n,endpoint=True)
+even=0.0
+odd=0.0
+
+points=np.array([11,31,101,301,1001,2001,10001,30001,100001])
+errsimpson=np.zeros(len(points))#points.shape
+
+m = 0
+for n in points:
+    odd = 0 ; even = 0
+    x=np.linspace(x0,xmax,n,endpoint=True)
+
+    
+    y=f(x)
+ 
+
+    for i in range(1,n-1,2):
+        odd=y[i]+odd
+  
+    for i in range(2,n-1,2):
+        even=even+y[i]
+  
+    
+    
+    y0=f(x[0])
+    ymax=f(x[-1])
+    s=float(even/3.0+odd*2.0/3.0+y0/6.0+ymax/6.0)*(xmax*2.0/(n-1))
+    error=np.abs(s-1)
+    
+    print 'Simpsons rule: error= ',error,'points= ',n
+    errsimpson[m]=error
+    m=m+1
+    
+errsimple=np.zeros(len(points)) #pints.size
+x0=0.0
+l=0
+xn=np.pi/2
+for dx in points:
+    
+    x=(np.linspace(x0,xn,dx, endpoint=True))
+    y=np.cos(x)
+    total=y.sum()*(xn/dx)
+    error1=np.abs(total-1)
+    print 'Simple rule: error= ',error1,'points= ',dx
+    errsimple[l]=error1
+    l=l+1
+
+
+plt.plot(points,errsimpson)
+plt.plot(points,errsimple)
+plt.yscale('log')
+plt.xscale('log')

@@ -1,0 +1,35 @@
+import numpy as np
+
+def f(x):
+    return np.cos(x)
+    
+x0=0.0
+xmax=np.pi/2.0
+
+
+points=[11,31,101,301,1001,3001,10001,30001]
+
+for n in points:
+    odd = 0 ; even = 0
+    x=np.linspace(x0,xmax,n,endpoint=True)
+    
+    y=f(x)
+
+    for i in range(1,n-1,2):
+        odd=y[i]+odd
+ 
+
+    for i in range(2,n-1,2):
+        even=even+y[i]
+ 
+    y0=y[0]
+    ymax=y[-1]
+    s=float(even/3.0+odd*2.0/3.0+y0/6.0+ymax/6.0)*(xmax*2.0/(n-1))
+    error=np.abs(s-1)
+    print 'integral for ',n,' is', s,'error is ',error
+    
+    #error scales as (1/90)*((b-a)/4)**5*np.abs(f''''(epsilon))
+    #where epsilon is some value between a and b.
+    #the error is asymptotically proportional to (b-a)**4
+    #You need 100001 points in simple rule to get the same accuracy as 
+    #11 points with simpsons rule- this has been done in the next tut example

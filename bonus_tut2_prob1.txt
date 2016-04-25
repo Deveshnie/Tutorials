@@ -1,0 +1,25 @@
+import func_example
+import scipy.integrate as quad
+import numpy as np
+
+a_value_half_integral1=[]
+a_value_half_integral2=[]
+b_value_half_integral1=[]
+b_value_half_integral2=[]
+
+a_value_half_integral1=quad.quad(func_example.mygauss, 0,20)[0]
+a_value_half_integral2=quad.quad(func_example.mygauss, -20,0)[0]
+
+b_value_half_integral1=quad.quad(func_example.mygauss, 0,15)[0]
+b_value_half_integral2=quad.quad(func_example.mygauss, -25,0)[0]
+
+print 'the center of the gaussian is chosen to be 0 in func_example.\n'
+print 'from -25 to 15, the centre of the gaussian is at -5. We need to integrate the gaussian from one'
+print'tail to -5 (center of this particular gaussian) and then from -5 to 15 (the other tail).'
+print'in the next case, the center is at 0 so we integrate from -20 to 0, then from 0 to 20'
+
+
+x=a_value_half_integral1+a_value_half_integral2
+y=b_value_half_integral1+b_value_half_integral2
+print 'the value of the integral of the gaussian function from -20 to 20 is ',x
+print 'the value of the integral of the gaussian function from -25 to 15 is ',y

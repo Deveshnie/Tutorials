@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def conv(y,shift):
+    g=np.zeros(len(y)) 
+    g[shift]=1
+    
+    ft1=np.fft.fft(y)
+    ft2=np.fft.fft(g)
+    return np.real(np.fft.ifft(ft2*ft1)) 
+    
+def correlation(f,g):
+    return np.real(np.fft.ifft(np.fft.fft(f)*np.conj(np.fft.fft(g))))
+    
+ 
+
+x=np.arange(-100,100,0.1)
+y=np.exp(-0.5*x**2/(10**2)) 
+shift=len(y)/2
+h=conv(y,shift) #shifted gaussian
+plt.plot(x,correlation(y,y),'b') 
+plt.plot(x,correlation(h,h),'r')
+plt.xlim(-100,100)
+plt.show()
+plt.plot((correlation(y,y)-correlation(conv(y,shift),conv(y,shift))),'g')
+plt.show()
+g=np.abs(correlation(y,y)-correlation(conv(y,shift),conv(y,shift)))
+print 'the absolute difference between the values of the correlation and shifted correlation is ',g
+    #the difference between the correlation and the shifted correlation is very small
+    #it is approximately 10**-14, which is almost zero

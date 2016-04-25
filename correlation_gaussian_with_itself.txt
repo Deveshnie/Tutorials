@@ -1,0 +1,15 @@
+import numpy as np
+from matplotlib import pyplot as plt
+
+def correlation(f,g):
+    return np.real(np.fft.ifft(np.fft.fft(f)*np.conj(np.fft.fft(g))))
+    
+  
+x=np.arange(-100,100,0.1)
+f=np.exp(-0.5*x**2/(10**2))
+gauss=correlation(f,f)
+plt.plot(x,gauss)
+plt.title('Correlation of Gaussian with itself')
+
+plt.show()
+    
