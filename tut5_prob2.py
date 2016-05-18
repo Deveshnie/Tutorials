@@ -4,8 +4,7 @@ def simulate_gaussian(t,sig=0.5,amp=1,cent=0):
     dat=numpy.exp(-0.5*(t-cent)**2/sig**2)*amp
     dat+=numpy.random.randn(t.size)
     return dat
-
-#get a trial step. Take gaussian random numbers and scale by an input vector
+    
 def get_trial_offset(sigs):					#scale steps
     return sigs*numpy.random.randn(sigs.size)
 
