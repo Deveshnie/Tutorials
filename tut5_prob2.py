@@ -74,7 +74,7 @@ if __name__=='__main__':
     
     #short chain first
 
-    nstep=1500
+    nstep=2000
     
     par_chain,countshortchain=run_mcmc(dat,guess,nstep,scale)		#chain is record of guesses and chisq, or params
     print 'for the short chain, the accept fraction is ',countshortchain
