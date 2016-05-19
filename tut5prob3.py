@@ -10,7 +10,7 @@ def sim_lorentzian(t,a=1.0,b=1.0,c=1.0):
     dat=a/(b+(t-c)**2)
     dat+=numpy.random.randn(t.size)
     return dat  
-#get a trial step. Take gaussian random numbers and scale by an input vector
+
 def get_trial_offset(sigs):
     return sigs*numpy.random.randn(sigs.size)
 
@@ -85,12 +85,12 @@ def run_mcmc(data,start_pos,nstep,scale=None):
 
 if __name__=='__main__':
     
-    #get a realization of a gaussian, with noise added
+   
     t=numpy.arange(-4.5,4.5,0.01)
-    #dat=Gaussian(t,amp=2.5)
+  
     dat=Lorentzian(t,b=2.5)
 
-    #pick a random starting position, and guess some errors
+
     guess=numpy.array([0.3,0.3,0.3,-0.2])
     scale=numpy.array([0.01,0.01,0.01,0.01])
     nstep=100000
@@ -98,7 +98,7 @@ if __name__=='__main__':
     nn=numpy.round(0.2*nstep)
     chain=chain[nn:,:]
     
-    #pull true values out, compare to what we got
+   
     param_true=numpy.array([dat.a,dat.b,dat.c,dat.offset])
     for i in range(0,param_true.size):
         val=numpy.mean(chain[:,i])
