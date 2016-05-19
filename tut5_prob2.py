@@ -63,42 +63,40 @@ def run_mcmc(data,start_pos,nstep,scale=None):
 
 if __name__=='__main__':
     
-    #get a realization of a gaussian, with noise added
+
     t=numpy.arange(-5,5,0.01)
     dat=Gaussian(t,amp=2.5)			#gaussian you wanted data for has amp=2.5
 
-    #pick a random starting position, and guess some errors
+
     guess=numpy.array([0.3,1.2,0.3,-0.2])    
-    #guess=numpy.array([0.3,1.2,0.3,-0.2])
+   
     scale=numpy.array([0.1,0.1,0.1,0.1])		#0.1 stepsize
     
     #short chain first
 
-    nstep=1000
+    nstep=1500
     
     par_chain,countshortchain=run_mcmc(dat,guess,nstep,scale)		#chain is record of guesses and chisq, or params
     print 'for the short chain, the accept fraction is ',countshortchain
     nn=numpy.round(0.2*nstep)		
-    par_chain=par_chain[int(nn):,:]			                  #[20000:end]=rows for all colms
+    par_chain=par_chain[int(nn):,:]			               
     
     newchain=par_chain[0:nstep,0:4]
-    newscale=numpy.std(newchain,0) #we want to computee standard deviation of the 
+    newscale=numpy.std(newchain,0) #we want to compute standard deviation of the 
                                     #parameters down the columns. axis=0
-    nstep=30000          #get longer chain
+    nstep=40000          #get longer chain
     
     
     par_chain,countlongchain=run_mcmc(dat,par_chain[int(nn),0:4],nstep,newscale)
     print 'for the long chain we have accept fraction, ',countlongchain
-    #nstep=100000
+   
     
-    #pull true values out, compare to what we got
+
     param_true=numpy.array([dat.sig,dat.amp,dat.cent,dat.offset])
     for i in range(0,param_true.size):
-        val=numpy.mean(par_chain[:,i])			#rows from 20000-100 000 and column 0(look at column 0 and find mean)
+        val=numpy.mean(par_chain[:,i])			
 											#find mean of that specific parameter, eg sig
         scat=numpy.std(par_chain[:,i])			#same thing with std dev
         print [param_true[i],val,scat]		#you check if the true param values are close to the mean and if the 
 											#std dev values are small
         
-#in the 100 000 chain, the accept fraction is 5.6%
-        #in the 100 chain the accept fraction is 19%
