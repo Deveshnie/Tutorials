@@ -27,7 +27,7 @@ class NbodyStarter:
                 yy=self.y[i]-self.y[j]
                 radiusSquared=xx**2+yy**2 #make sure distance between particles is poitive
                 softened=self.options['soft']**2
-                #radiusSquared[radiusSquared<softened]=softened
+               
                 if radiusSquared<softened:
                     
                     radiusSquared=softened
