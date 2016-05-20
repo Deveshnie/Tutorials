@@ -71,7 +71,7 @@ def run_mcmc(data,start_pos,nstep,scale=None):
         else:
             delt=new_chisq-cur_chisq
             prob=numpy.exp(-0.5*delt)
-            if numpy.random.rand()<prob:
+            if numpy.random.randn()<prob:
                 accept=True
             else:
                 accept=False
@@ -86,12 +86,12 @@ def run_mcmc(data,start_pos,nstep,scale=None):
 if __name__=='__main__':
     
    
-    t=numpy.arange(-4.5,4.5,0.01)
+    t=numpy.arange(-5.0,5.0,0.01)
   
     dat=Lorentzian(t,b=2.5)
 
 
-    guess=numpy.array([0.3,0.3,0.3,-0.2])
+    guess=numpy.array([0.4,1.0,0.4,0.2])
     scale=numpy.array([0.01,0.01,0.01,0.01])
     nstep=100000
     chain=run_mcmc(dat,guess,nstep,scale)
