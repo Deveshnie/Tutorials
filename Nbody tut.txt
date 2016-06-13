@@ -75,6 +75,7 @@ if __name__=='__main__':
     dx=0    
     while (dx<100):
         finalPotential=nclass.UpdatePos(0.05)
+        plt.clf()
         kineticenergy=np.sum(nclass.m*(nclass.vx**2+nclass.vy**2))
         print 'Total energy: ',[finalPotential,kineticenergy,kineticenergy-2.0*finalPotential]
         plt.plot(nclass.x,nclass.y,'b*')
